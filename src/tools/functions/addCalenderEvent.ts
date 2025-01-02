@@ -1,4 +1,4 @@
-import { addEventToCalendar } from '../../pages/Settings';
+// import { addEventToCalendar } from '../../pages/Settings';
 import { EventDetails } from '../../types/eventDetails';
 
 const functionDescription =
@@ -35,15 +35,15 @@ export const addCalenderEvent = {
 
 //TODO : Use different logic for adding events to calender
 export async function addCalenderEventFunction() {
-    const eventDetails: EventDetails = {
-      summary: summary,
-      description: description,
-      start: {
-        dateTime: dateTime,
-        timeZone: timeZone,
-      },
-    };
+    // const eventDetails: EventDetails = {
+    //   summary: summary,
+    //   description: description,
+    //   start: {
+    //     dateTime: dateTime,
+    //     timeZone: timeZone,
+    //   },
+    // };
 
-  addEventToCalendar('shreeharan2003@gmail.com');
+  // addEventToCalendar('');
   return;
 }

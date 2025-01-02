@@ -13,21 +13,25 @@ import MessageList from '../components/ui/MessageList';
 import { tokenList } from '../store/tokens/tokenMapping';
 import { fetchMagicEdenLaunchpadCollections } from '../lib/solana/magiceden';
 import { addCalenderEventFunction } from '../tools/functions/addCalenderEvent';
+import RenderBlinks from '../components/RenderBlinks';
 
 const Conversation = () => {
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [isWalletVisible, setIsWalletVisible] = useState(false);
   const [events, setEvents] = useState<any[]>([]);
   const [dataChannel, setDataChannel] = useState<RTCDataChannel | null>(null);
-  const peerConnection = useRef<RTCPeerConnection | null>(null);
-  const audioElement = useRef<HTMLAudioElement | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder>();
   const [messageList, setMessageList] = useState<MessageCard[]>();
+  const [isBlinksVisible, setIsBlinksVisible] = useState(false);
+  const [blinkName, setBlinkName] = useState('');
+
+  const peerConnection = useRef<RTCPeerConnection | null>(null);
+  const audioElement = useRef<HTMLAudioElement | null>(null);
+
+  const rpc = process.env.SOLANA_RPC;
 
   const { wallets } = useSolanaWallets();
   const solanaWallet = wallets[0];
-
-  const rpc = process.env.SOLANA_RPC;
 
   const transferSol = async () => {
     if (!rpc) return;
@@ -160,7 +164,6 @@ const Conversation = () => {
       return;
     }
   };
-
 
   const startSession = async () => {
     try {
@@ -382,7 +385,8 @@ const Conversation = () => {
                 sendClientEvent({
                   type: 'response.create',
                   response: {
-                    instructions: 'The event has been successfully added to calender.',
+                    instructions:
+                      'The event has been successfully added to calender.',
                   },
                 });
               }, 500);
@@ -428,6 +432,7 @@ const Conversation = () => {
         {messageList && (
           <section className="flex-grow flex justify-center items-start overflow-y-auto">
             <MessageList messageList={messageList} />
+            {isBlinksVisible && <RenderBlinks actionName={blinkName} />}
           </section>
         )}
         {/* End of Message display Section */}
