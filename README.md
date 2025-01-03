@@ -31,6 +31,7 @@ OPEN_AI_API_KEY = <>
 PRVI_APP_ID = <>
 HELIUS_API_KEY = <>
 SOLANA_RPC = <>
+WALLET_SERVICE_URL = <>
 ```
 
 > During production you will have to 3rd party services to keep the key secure. Refer Cloudflare tools.
